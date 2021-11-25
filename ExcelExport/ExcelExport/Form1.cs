@@ -104,6 +104,10 @@ namespace ExcelExport
             firstcolumn.Font.Bold = true;
             firstcolumn.Interior.Color = Color.LightYellow;
 
+            Excel.Range lastcolumn = xlSheet.get_Range(GetCell(2, 9), GetCell(Flats.Count + 1, headers.Length));
+            lastcolumn.Interior.Color = Color.LightGreen;
+            lastcolumn.NumberFormat = "0.0";
+
         }
 
         private void LoadData()
