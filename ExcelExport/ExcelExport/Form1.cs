@@ -96,6 +96,11 @@ namespace ExcelExport
             headerRange.RowHeight = 60;
             headerRange.Interior.Color = Color.Salmon;
             headerRange.BorderAround2(Excel.XlLineStyle.xlDashDotDot, Excel.XlBorderWeight.xlMedium);
+
+            Excel.Range entirerange = xlSheet.get_Range(GetCell(2, 1), GetCell(Flats.Count + 1, headers.Length));
+            entirerange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium);
+
+           
         }
 
         private void LoadData()
