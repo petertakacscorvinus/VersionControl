@@ -12,7 +12,7 @@ namespace MintaZH.Entities
 
         public string Country { get; set; }
 
-        public int[] vs { get; set; }
+        public int[] Medals { get; set; }
 
         public int Position { get; set; } 
     }
