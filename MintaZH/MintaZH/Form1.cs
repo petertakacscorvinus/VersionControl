@@ -22,6 +22,7 @@ namespace MintaZH
             Betolt("Summer_olympic_Medals.csv");
             ComboFeltolt();
             Osztalyozas();
+            dataGridView1.DataSource = results;
         }
 
         private void Osztalyozas()
@@ -73,6 +74,9 @@ namespace MintaZH
 
         }
 
-       
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
