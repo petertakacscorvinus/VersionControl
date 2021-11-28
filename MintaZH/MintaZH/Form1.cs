@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MintaZH.Entities;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace MintaZH
 {
@@ -41,7 +43,7 @@ namespace MintaZH
                 else if ((item.Medals[0] == res.Medals[0]) && (item.Medals[1] > res.Medals[1]) && (item.Medals[2] > res.Medals[2])) counter++;
                 
             }
-            return counter;
+            return counter + 1;
         }
 
         private void ComboFeltolt()
@@ -74,9 +76,31 @@ namespace MintaZH
 
         }
 
+        Excel.Application xlApp;
+        Excel.Workbook xlWb;
+        Excel.Worksheet xlSheet;
         private void btnExcel_Click(object sender, EventArgs e)
         {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWb = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWb.ActiveSheet;
 
+                
+
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                xlWb.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWb = null;
+                xlApp = null;
+            }
         }
     }
 }
