@@ -42,6 +42,7 @@
             this.cbxEv.Name = "cbxEv";
             this.cbxEv.Size = new System.Drawing.Size(152, 21);
             this.cbxEv.TabIndex = 0;
+            this.cbxEv.SelectedIndexChanged += new System.EventHandler(this.cbxEv_SelectedIndexChanged);
             // 
             // label1
             // 

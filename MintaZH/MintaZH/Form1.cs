@@ -29,7 +29,10 @@ namespace MintaZH
 
         private void Osztalyozas()
         {
-            
+            foreach (OlympicResult item in results)
+            {
+                item.Position = Helyezes(item);
+            }
         }
 
         int Helyezes(OlympicResult res)
@@ -87,7 +90,7 @@ namespace MintaZH
                 xlWb = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWb.ActiveSheet;
 
-                
+                ExcelFeltolt();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -101,6 +104,43 @@ namespace MintaZH
                 xlWb = null;
                 xlApp = null;
             }
+        }
+
+        private void ExcelFeltolt()
+        {
+            var headers = new string[]
+                 {
+                "Helyezés",
+                 "Ország",
+                 "Arany",
+                 "Ezüst",
+                 "Bronz"
+
+
+                };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
+            }
+
+            var filteredReult = from x in results where x.Year == (int)cbxEv.SelectedItem orderby x.Position select x;
+            int aktsor = 2;
+            foreach (var item in filteredReult)
+            {
+                xlSheet.Cells[aktsor, 1] = item.Position;
+                xlSheet.Cells[aktsor, 2] = item.Country;
+                for (int i = 0; i < 3; i++)
+                {
+                    xlSheet.Cells[aktsor, 3 + i] = item.Medals[i];
+                }
+                aktsor++;
+            }
+        }
+
+        private void cbxEv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var filteredReult = from x in results where x.Year == (int)cbxEv.SelectedItem select x;
+            dataGridView1.DataSource = filteredReult.ToList();
         }
     }
 }
