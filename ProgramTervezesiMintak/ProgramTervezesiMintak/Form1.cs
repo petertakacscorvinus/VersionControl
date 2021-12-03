@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgramTervezesiMintak.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,44 @@ namespace ProgramTervezesiMintak
 {
     public partial class Form1 : Form
     {
+        List<Ball> _balls = new List<Ball>();
+        private BallFactory _factory;
+        public BallFactory Factory
+        {
+            get { return _factory; }
+            set { _factory = value; }
+        }
+
         public Form1()
         {
             InitializeComponent();
+            Factory = new BallFactory();
+        }
+
+        private void createTimer_Tick(object sender, EventArgs e)
+        {
+            Ball b = Factory.CreateNew();
+            _balls.Add(b);
+            b.Left = -b.Width;
+            mainPanel.Controls.Add(b);
+        }
+
+        private void conveyorTimer_Tick(object sender, EventArgs e)
+        {
+            if (_balls.Count == 0) return;
+            Ball lastBall = _balls[0];
+
+            foreach (Ball item in _balls)
+            {
+                item.MoveBall();
+                if (item.Left > lastBall.Left) lastBall = item;
+            }
+
+            if (lastBall.Left > 1000)
+            {
+                _balls.Remove(lastBall);
+                mainPanel.Controls.Remove(lastBall);
+            }
         }
     }
 }

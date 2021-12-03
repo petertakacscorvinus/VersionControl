@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ProgramTervezesiMintak.Entities
 {
-    class Ball: Label
+    public class Ball: Label
     {
 
         public  Ball()
@@ -29,7 +29,7 @@ namespace ProgramTervezesiMintak.Entities
             g.FillEllipse(new SolidBrush(Color.Red), 0, 0, Width, Height);
         }
 
-        void MoveBall()
+        public void MoveBall()
         {
             Left++;
         }
