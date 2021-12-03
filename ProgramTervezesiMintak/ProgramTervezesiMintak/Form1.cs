@@ -73,7 +73,10 @@ namespace ProgramTervezesiMintak
 
         private void btnBall_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory
+            {
+                BallColor = btnBallCollor.BackColor
+            };
         }
 
         private void btnCar_Click(object sender, EventArgs e)
@@ -83,13 +86,13 @@ namespace ProgramTervezesiMintak
 
         private void btnBallCollor_Click(object sender, EventArgs e)
         {
-            var button = (Button)sender;
+            var kattintott = (Button)sender;
             var colorPicker = new ColorDialog();
 
-            colorPicker.Color = button.BackColor;
+            colorPicker.Color = kattintott.BackColor;
             if (colorPicker.ShowDialog() != DialogResult.OK)
                 return;
-            button.BackColor = colorPicker.Color;
+            kattintott.BackColor = colorPicker.Color;
         }
     }
 }
