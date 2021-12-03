@@ -42,7 +42,7 @@ namespace ProgramTervezesiMintak
 
             foreach (Ball item in _toys)
             {
-                item.MoveBall();
+                item.MoveToy();
                 if (item.Left > lastBall.Left) lastBall = item;
             }
 
