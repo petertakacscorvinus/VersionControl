@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace ProgramTervezesiMintak.Entities
 {
-    public class Ball: Toy
+    public class Ball : Toy
     {
         public SolidBrush BallColor { get; private set; }
 
-        public Ball(Color color)
+        public Ball(Color kivantszin)
         {
-            BallColor = new SolidBrush(color);
+            BallColor = new SolidBrush(kivantszin);
         }
 
         protected override void DrawImage(Graphics g)

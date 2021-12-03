@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44FB7DF1-5A05-4E2E-AB67-F686D5C216DB}</ProjectGuid>
+    <ProjectGuid>{39170D34-53A5-40D0-9D98-0C81511B22CB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ProgramTervezesiMintak</RootNamespace>
-    <AssemblyName>ProgramTervezesiMintak</AssemblyName>
+    <RootNamespace>Webszolgaltatas</RootNamespace>
+    <AssemblyName>Webszolgaltatas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,18 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\IToyFactory.cs" />
-    <Compile Include="Abstractions\Toy.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Entities\Ball.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Entities\BallFactory.cs" />
-    <Compile Include="Entities\Car.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Entities\CarFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,9 +54,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -90,11 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\car.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

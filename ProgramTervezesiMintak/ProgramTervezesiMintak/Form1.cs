@@ -14,7 +14,7 @@ namespace ProgramTervezesiMintak
 {
     public partial class Form1 : Form
     {
-        List<Ball> _toys = new List<Ball>();
+        List<Toy> _toys = new List<Toy>();
 
         private Toy _nextToy;
 
@@ -34,10 +34,11 @@ namespace ProgramTervezesiMintak
             if (_nextToy != null)
                 Controls.Remove(_nextToy);
             _nextToy = Factory.CreateNew();
-            _nextToy.Top = lblNext.Top + lblNext.Height + 20;
-            _nextToy.Left = lblNext.Left;
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
             Controls.Add(_nextToy);
         }
+
 
         public Form1()
         {
@@ -56,35 +57,32 @@ namespace ProgramTervezesiMintak
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             if (_toys.Count == 0) return;
-            Ball lastBall = _toys[0];
+            Toy lastToy = _toys[0];
 
-            foreach (Ball item in _toys)
+            foreach (Toy item in _toys)
             {
                 item.MoveToy();
-                if (item.Left > lastBall.Left) lastBall = item;
+                if (item.Left > lastToy.Left) lastToy = item;
             }
 
-            if (lastBall.Left > 1000)
+            if (lastToy.Left > 1000)
             {
-                _toys.Remove(lastBall);
-                mainPanel.Controls.Remove(lastBall);
+                _toys.Remove(lastToy);
+                mainPanel.Controls.Remove(lastToy);
             }
+
         }
 
         private void btnBall_Click(object sender, EventArgs e)
         {
             Factory = new BallFactory
             {
-                BallColor = btnBallCollor.BackColor
+                BallColor = btnCollor.BackColor
             };
+
         }
 
-        private void btnCar_Click(object sender, EventArgs e)
-        {
-            Factory = new CarFactory();
-        }
-
-        private void btnBallCollor_Click(object sender, EventArgs e)
+        private void btnCollor_Click(object sender, EventArgs e)
         {
             var kattintott = (Button)sender;
             var colorPicker = new ColorDialog();
@@ -93,6 +91,11 @@ namespace ProgramTervezesiMintak
             if (colorPicker.ShowDialog() != DialogResult.OK)
                 return;
             kattintott.BackColor = colorPicker.Color;
+        }
+
+        private void btnCar_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
         }
     }
 }

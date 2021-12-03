@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProgramTervezesiMintak.Entities
 {
-    public class BallFactory
+    public class BallFactory : IToyFactory
     {
         public Color BallColor { get; set; }
 

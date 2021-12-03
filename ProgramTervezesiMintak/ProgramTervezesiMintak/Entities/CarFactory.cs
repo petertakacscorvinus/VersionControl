@@ -9,9 +9,10 @@ namespace ProgramTervezesiMintak.Entities
 {
     public class CarFactory : Abstractions.IToyFactory
     {
-        public  Toy CreateNew()
+        public Toy CreateNew()
         {
             return new Car();
         }
+
     }
 }
