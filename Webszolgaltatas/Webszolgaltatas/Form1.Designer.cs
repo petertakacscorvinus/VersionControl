@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.chartRateData = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tolPicker = new System.Windows.Forms.DateTimePicker();
+            this.igPicker = new System.Windows.Forms.DateTimePicker();
+            this.cbValuta = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartRateData)).BeginInit();
             this.SuspendLayout();
@@ -40,32 +43,66 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 13);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 57);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(355, 571);
+            this.dataGridView1.Size = new System.Drawing.Size(381, 571);
             this.dataGridView1.TabIndex = 0;
             // 
             // chartRateData
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartRateData.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartRateData.Legends.Add(legend1);
-            this.chartRateData.Location = new System.Drawing.Point(374, 12);
+            chartArea3.Name = "ChartArea1";
+            this.chartRateData.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartRateData.Legends.Add(legend3);
+            this.chartRateData.Location = new System.Drawing.Point(419, 57);
             this.chartRateData.Name = "chartRateData";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartRateData.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartRateData.Series.Add(series3);
             this.chartRateData.Size = new System.Drawing.Size(750, 572);
             this.chartRateData.TabIndex = 1;
             this.chartRateData.Text = "chart1";
+            // 
+            // tolPicker
+            // 
+            this.tolPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tolPicker.Location = new System.Drawing.Point(12, 12);
+            this.tolPicker.Name = "tolPicker";
+            this.tolPicker.Size = new System.Drawing.Size(108, 20);
+            this.tolPicker.TabIndex = 2;
+            this.tolPicker.ValueChanged += new System.EventHandler(this.paramChanged);
+            // 
+            // igPicker
+            // 
+            this.igPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.igPicker.Location = new System.Drawing.Point(144, 12);
+            this.igPicker.Name = "igPicker";
+            this.igPicker.Size = new System.Drawing.Size(116, 20);
+            this.igPicker.TabIndex = 3;
+            this.igPicker.ValueChanged += new System.EventHandler(this.paramChanged);
+            // 
+            // cbValuta
+            // 
+            this.cbValuta.FormattingEnabled = true;
+            this.cbValuta.Items.AddRange(new object[] {
+            "EUR",
+            "USD",
+            "GBP"});
+            this.cbValuta.Location = new System.Drawing.Point(286, 12);
+            this.cbValuta.Name = "cbValuta";
+            this.cbValuta.Size = new System.Drawing.Size(121, 21);
+            this.cbValuta.TabIndex = 4;
+            this.cbValuta.SelectedIndexChanged += new System.EventHandler(this.paramChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 608);
+            this.ClientSize = new System.Drawing.Size(1204, 640);
+            this.Controls.Add(this.cbValuta);
+            this.Controls.Add(this.igPicker);
+            this.Controls.Add(this.tolPicker);
             this.Controls.Add(this.chartRateData);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -80,6 +117,9 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartRateData;
+        private System.Windows.Forms.DateTimePicker tolPicker;
+        private System.Windows.Forms.DateTimePicker igPicker;
+        private System.Windows.Forms.ComboBox cbValuta;
     }
 }
 

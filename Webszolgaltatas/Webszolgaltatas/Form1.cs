@@ -21,6 +21,14 @@ namespace Webszolgaltatas
         public Form1()
         {
             InitializeComponent();
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            if (cbValuta.SelectedItem == null) return;
+
+            _rates.Clear();            
             loadXml(getRates());
             dataGridView1.DataSource = _rates;
             makeChart();
@@ -67,14 +75,18 @@ namespace Webszolgaltatas
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody req = new GetExchangeRatesRequestBody();
-            req.currencyNames = "EUR";
-            req.startDate = "2020-01-01";
-            req.endDate = "2020-06-30";
+            req.currencyNames = cbValuta.SelectedItem.ToString();
+            req.startDate = tolPicker.Value.ToString("yyyy-MM-dd");
+            req.endDate = igPicker.Value.ToString("yyyy-MM-dd");
             var response = mnbService.GetExchangeRates(req);
             var result = response.GetExchangeRatesResult;
             return result;
         }
 
-
+        
+        private void paramChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }
