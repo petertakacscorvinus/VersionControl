@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using Webszolgaltatas.Entities;
 using Webszolgaltatas.MnbServiceReference;
@@ -22,6 +23,26 @@ namespace Webszolgaltatas
             InitializeComponent();
             loadXml(getRates());
             dataGridView1.DataSource = _rates;
+            makeChart();
+        }
+
+        private void makeChart()
+        {
+            chartRateData.DataSource = _rates;
+
+            var sorozatok = chartRateData.Series[0];
+            sorozatok.ChartType = SeriesChartType.Line;
+            sorozatok.XValueMember = "Date";
+            sorozatok.YValueMembers = "Value";
+            sorozatok.BorderWidth = 2;
+
+            var jelmagyarazat = chartRateData.Legends[0];
+            jelmagyarazat.Enabled = false;
+
+            var diagramterulet = chartRateData.ChartAreas[0];
+            diagramterulet.AxisX.MajorGrid.Enabled = false;
+            diagramterulet.AxisY.MajorGrid.Enabled = false;
+            diagramterulet.AxisY.IsStartedFromZero = false;
         }
 
         private void loadXml(string xmlstring)
