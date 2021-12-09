@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Webszolgaltatas.Entities;
 using Webszolgaltatas.MnbServiceReference;
 
 namespace Webszolgaltatas
 {
     public partial class Form1 : Form
     {
-        
-        
+        BindingList<RateData> _rates;
         
         public Form1()
         {
             InitializeComponent();
             getRates();
+            dataGridView1.DataSource = _rates;
         }
 
         private void getRates()
