@@ -42,6 +42,36 @@ namespace Mikroszimulacio
             }
         }
 
+        private void SzimulaciosLepes(Person person, int year)
+        {
+            if (!person.IsAlive) return;
+            int kor = year - person.BirthYear;
+            //halálozás valószínűsége
+            double halalvaloszinuseg = (from x in DeathProbabilities where x.Gender == person.Gender && x.Age == kor select x.P).FirstOrDefault();
+            double veletlen = rng.NextDouble();
+            if (veletlen <= halalvaloszinuseg)
+                person.IsAlive = false;
+
+            if (person.IsAlive && person.Gender == Gender.Female)
+            {
+
+                double szuletesvaloszinuseg = (from x in BirthProbabilities where x.Age == kor select x.P).FirstOrDefault();
+                veletlen = rng.NextDouble();
+                if (veletlen <= szuletesvaloszinuseg)
+                {
+
+                    Person baba = new Person();
+                    baba.BirthYear = year;
+                    baba.NbrOfChildren = 0;
+                    baba.Gender = (Gender)rng.Next(1, 3);
+                    Population.Add(baba);
+
+                }
+
+            }
+
+        }
+
         public List<Person> GetPopulation(string csvpath)
         {
 
