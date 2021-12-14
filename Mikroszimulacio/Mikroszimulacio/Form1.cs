@@ -17,29 +17,59 @@ namespace Mikroszimulacio
         List<Person> Population;
         List<BirthProbabilities> BirthProbabilities;
         List<DeathProbabilities> DeathProbabilities;
+        List<int> ferfiak = new List<int>();
+        List<int> nok = new List<int>();
+
 
         Random rng = new Random(1234);
         public Form1()
         {
             InitializeComponent();
 
-            for (int year = 2005; year <= 2024; year++)
+            
+        }
+
+        private void Simulation(int zaroev, string fajlnev)
+
+
+
+        {
+            ferfiak.Clear();
+            nok.Clear();
+
+            Population = GetPopulation(fajlnev);
+            BirthProbabilities = GetBirthProbabilities(@"C:\Teszt\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Teszt\halál.csv");
+
+            for (int year = 2005; year <= zaroev; year++)
             {
-                // Végigmegyünk az összes személyen
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    // Ide jön a szimulációs lépés
+                    SzimulaciosLepes(Population[i], year);
                 }
 
-                int nbrOfMales = (from x in Population
-                                  where x.Gender == Gender.Male && x.IsAlive
-                                  select x).Count();
-                int nbrOfFemales = (from x in Population
-                                    where x.Gender == Gender.Female && x.IsAlive
-                                    select x).Count();
-                Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+                int ferfiakszama = (from x in Population where x.Gender == Gender.Male select x).Count();
+                int nokszama = (from x in Population where x.Gender == Gender.Female select x).Count();
+
+                ferfiak.Add(ferfiakszama);
+                nok.Add(nokszama);
+
+                Console.WriteLine(string.Format("Év: {0} Férfiak: {1} Nők {2}", year, ferfiakszama, nokszama));
             }
+            DisplayResults(zaroev);
+        }
+
+        void DisplayResults(int zaroev)
+        {
+            int counter = 0;
+            for (int year = 2005; year <= zaroev; year++)
+            {
+                richTextBox1.Text += string.Format("Szimulációs év: {0} \n\tFérfiak: {1} \n\tNők:{2}\n\t ", year, ferfiak[counter], nok[counter]);
+                counter++;
+
+
+            }
+
         }
 
         private void SzimulaciosLepes(Person person, int year)
@@ -96,6 +126,63 @@ namespace Mikroszimulacio
 
         }
 
+        public List<BirthProbabilities> GetBirthProbabilities(string csvpath)
+        {
 
+            List<BirthProbabilities> result = new List<BirthProbabilities>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+
+                while (!sr.EndOfStream)
+                {
+
+                    string line = sr.ReadLine();
+                    string[] items = line.Split(';');
+                    BirthProbabilities p = new BirthProbabilities();
+                    p.Age = int.Parse(items[0]);
+                    p.NbrOfChildren = int.Parse(items[1]);
+                    p.P = double.Parse(items[2]);
+                    result.Add(p);
+                }
+            }
+            return result;
+
+        }
+
+        public List<DeathProbabilities> GetDeathProbabilities(string csvpath)
+        {
+
+            List<DeathProbabilities> result = new List<DeathProbabilities>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+
+                while (!sr.EndOfStream)
+                {
+
+                    string line = sr.ReadLine();
+                    string[] items = line.Split(';');
+                    DeathProbabilities p = new DeathProbabilities();
+                    p.Gender = (Gender)Enum.Parse(typeof(Gender), items[0]);
+                    p.Age = int.Parse(items[1]);
+                    p.P = double.Parse(items[2]);
+                    result.Add(p);
+                }
+            }
+            return result;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK) textBox1.Text = ofd.FileName;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Simulation((int)numericUpDown1.Value, textBox1.Text);
+        }
     }
 }
