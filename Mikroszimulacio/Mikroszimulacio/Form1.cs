@@ -18,6 +18,7 @@ namespace Mikroszimulacio
         List<BirthProbabilities> BirthProbabilities;
         List<DeathProbabilities> DeathProbabilities;
 
+        Random rng = new Random(1234);
         public Form1()
         {
             InitializeComponent();
